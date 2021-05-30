@@ -1,0 +1,55 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    {%if edit%}
+        Editing Page
+    {%else%}
+        Adding New Page
+    {%endif%}
+{% endblock %}
+
+{% block body %}
+    <style>
+        .addingPageForm input[type=text]{
+            font-size: 30px;
+        }
+        .addingPageForm textarea{
+            min-height: 100%;
+            height: 100%;
+            margin-top: 1%;
+            width: 80%;
+        }
+        .addingPageForm input[type="submit"]{
+            margin-top: 1%;
+            
+        }
+        .addingPageForm button{
+            padding: 1px 6px;
+            border-width: 2px;
+            border-style: outset;
+            border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+            border-image: initial;
+            
+        }
+    </style>
+    {%if errorPresent%}
+        <p style=" padding: 0.5%; background-color: yellow; font-weight: bold; width: max-content;" >
+            {{error}}
+        </p>
+    {%endif%}
+    <div class="addingPageForm">
+    {%if edit%}
+        <form action="/wiki/{{entry}}/editPage" method="POST">
+    {%else%}
+        <form action="{% url 'newPage' %}" method="POST">
+    {%endif%}
+
+        {% csrf_token %}
+        {{form}}<br>
+            
+            <input type="submit" value="Add Page">
+            <!--<button href="{%url 'index'%}">Cancel</button>-->
+    </form>
+    </div>
+    
+
+{% endblock %}

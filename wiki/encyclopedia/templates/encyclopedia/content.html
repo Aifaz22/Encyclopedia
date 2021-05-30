@@ -1,0 +1,12 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div style="padding-right: 5%;">
+        <a style="float: right;" class="btn btn-light btn-outline-secondary" href="/wiki/{{ title }}/editPage" role="button">Edit Page</a>
+    </div>
+    {{ body|safe }}
+{% endblock %}
